@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: base_google_sheets__budget
+    latest_version: 1
+    config:
+      materialized: view
+      contract:
+        enforced: true
+    description: >
+      Info about budget
+
+    columns:
+      - name: product_id
+        data_type: varchar
+      - name: quantity
+        data_type: int
+      - name: month
+        data_type: date
+      - name: _fivetran_synced
+        data_type: TIMESTAMP_TZ
+    
+
+    versions:
+      - v: 1
+        config:
+            materialized: view         
+      - v: 2
+        config:
+            materialized: view
+        columns:
+          - include: all
+            exclude: [quantity]    
+            
+
