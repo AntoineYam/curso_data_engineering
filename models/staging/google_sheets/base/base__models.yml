@@ -25,11 +25,6 @@ models:
       - v: 1
         config:
             materialized: view         
-      - v: 2
-        config:
-            materialized: view
-        columns:
-          - include: all
-            exclude: [quantity]    
+
             
 
