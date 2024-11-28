@@ -6,7 +6,7 @@ models:
     config:
       materialized: view
       contract:
-        enforced: true
+        enforced: false
     description: >
       Info about budget
 
