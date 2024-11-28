@@ -1,21 +1,22 @@
-{{
-  config(
-    materialized='view'
-  )
-}}
+with 
 
-WITH src_budget AS (
-    SELECT * 
-    FROM {{ ref('base_google_sheets__budget') }}
-    ),
+source as (
 
-renamed_casted AS (
-    SELECT
-          product_id
-        , quantity
-        , month
-        , _fivetran_synced AS date_load
-    FROM src_budget
-    )
+    select * from {{ source('google_sheets', 'budget') }}
 
-SELECT * FROM renamed_casted
+),
+
+renamed as (
+
+    select
+        _row,
+        quantity,
+        month,
+        product_id,
+        _fivetran_synced
+
+    from source
+
+)
+
+select * from renamed
